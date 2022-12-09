@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Hash do Browser</title>
+</head>
+
+<body>
+
+  <h1>Hash/ID do Browser</h1>
+  <p id="hash"></p>
+
+  <script>
+    // Consome a API do Fingerprint.js
+    const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+      .then(FingerprintJS => FingerprintJS.load())
+
+    // Pega o identificador do visitante
+    fpPromise
+      .then(fp => fp.get())
+      .then(result => {
+        // identificador do visitante
+        const visitorId = result.visitorId
+        console.log(visitorId)
+        document.getElementById("hash").innerHTML = visitorId;
+      })
+      .catch(error => console.error(error))
+  </script>
+</body>
+
+</html>
